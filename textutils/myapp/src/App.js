@@ -40,7 +40,7 @@ function App() {
         <Alert alert={alert} />
         <Routes>
           <Route exact path="/about" element={<About isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
-          <Route exact path="/" element={<div className='container'>
+          <Route exact path="/TextUtils" element={<div className='container'>
             <Textform heading="Enter your Text to be analyzed" showAlert={showAlert} />
           </div>} />
         </Routes>
