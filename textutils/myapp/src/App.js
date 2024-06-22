@@ -1,10 +1,11 @@
 import './App.css';
 import './textutils.css';
 import React, { useEffect, useState } from 'react';
-import Navbar from './components/Navbar.js'
-import Tbox from './components/Textform.js'
-import About from './components/about.js'
-import Alert from './components/Alert.js';
+import Navbar from './components/Navbar';
+import Textform from './components/Textform';
+import About from './components/about';
+import Alert from './components/Alert';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -33,16 +34,18 @@ function App() {
   }, [isDarkMode]);
 
   return (
-    <>
-      <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
+    <div className={isDarkMode ? 'dark-mode' : 'light-mode'}>
+      <BrowserRouter>
         <Navbar title="TextUtils" isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         <Alert alert={alert} />
-        <div className='container'>
-          <Tbox heading="Enter your Text to be analyzed" showAlert={showAlert} />
-          <About isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-        </div>
-      </div>
-    </>
+        <Routes>
+          <Route exact path="/about" element={<About isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
+          <Route exact path="/" element={<div className='container'>
+            <Textform heading="Enter your Text to be analyzed" showAlert={showAlert} />
+          </div>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
